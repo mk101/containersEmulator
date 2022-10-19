@@ -1,0 +1,22 @@
+{
+  "containersCount": 100,
+  "startEmulatingTime": "19.10.2022 12:20",
+  "maxTimeShift": 52.0,
+  "recordingStep": 3,
+  "stepCount": 4242,
+  "sensors": [
+    {
+      "id": 1,
+      "name": "Sensor 1",
+      "average": 14.6,
+      "maximumDispersion": 10
+    },
+    {
+      "id": 2,
+      "name": "Sensor 2",
+      "average": 10,
+      "maximumDispersion": 1
+    }
+  ],
+  "sendInterval": 10
+}
