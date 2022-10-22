@@ -11,6 +11,7 @@
   <modules>
     <module>emulator</module>
     <module>requestManager</module>
+    <module>processor</module>
   </modules>
 
   <name>globus-exam</name>

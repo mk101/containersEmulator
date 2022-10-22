@@ -98,3 +98,15 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: ignored
     #entrypoint: [ '/bin/sh', '-c' ]
     command: "kafka-topics --create --if-not-exists --bootstrap-server broker1:29092 --partitions 3 --replication-factor 3 --topic containers"
+
+  database:
+    image: postgres
+    container_name: database
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=globus
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql

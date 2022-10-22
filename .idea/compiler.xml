@@ -9,11 +9,13 @@
         <outputRelativeToContentRoot value="true" />
         <module name="requestManager" />
         <module name="emulator" />
+        <module name="processor" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="processor" options="-parameters" />
       <module name="requestManager" options="-parameters" />
     </option>
   </component>
