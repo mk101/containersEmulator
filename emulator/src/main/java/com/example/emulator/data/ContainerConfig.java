@@ -2,16 +2,15 @@ package com.example.emulator.data;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-public class EmulatorConfig {
-    private int containersCount;
-    private Date startEmulatingTime;
+@Builder
+public class ContainerConfig {
+    private int containerNumber;
+    private Calendar startEmulatingTime;
     private double maxTimeShift;
     private double recordingStep;
     private int stepCount;

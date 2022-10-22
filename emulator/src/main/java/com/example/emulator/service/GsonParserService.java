@@ -1,6 +1,7 @@
 package com.example.emulator.service;
 
 import com.example.emulator.data.EmulatorConfig;
+import com.example.emulator.dto.ContainerDto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -10,11 +11,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class GsonParseService implements ParseService {
+public class GsonParserService implements ParserService {
     private final Gson gson;
 
-    public GsonParseService() {
-        gson = new GsonBuilder().setDateFormat("dd.MM.yyyy HH:mm").create();
+    public GsonParserService() {
+        gson = new GsonBuilder().setDateFormat("dd.MM.yyyy HH:mm:ss").create();
     }
 
     @Override
@@ -23,5 +24,10 @@ public class GsonParseService implements ParseService {
         String json = String.join(" ", lines);
 
         return gson.fromJson(json, EmulatorConfig.class);
+    }
+
+    @Override
+    public String ContainerToString(ContainerDto container) {
+        return gson.toJson(container);
     }
 }

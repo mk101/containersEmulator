@@ -1,6 +1,6 @@
 {
   "containersCount": 100,
-  "startEmulatingTime": "19.10.2022 12:20",
+  "startEmulatingTime": "19.10.2022 12:20:00",
   "maxTimeShift": 52.0,
   "recordingStep": 3,
   "stepCount": 4242,
