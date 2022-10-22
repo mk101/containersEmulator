@@ -1,17 +1,14 @@
 package com.example.emulator;
 
 import com.example.emulator.data.EmulatorConfig;
-import com.example.emulator.service.EmulatorService;
-import com.example.emulator.service.GsonParserService;
-import com.example.emulator.service.ParserService;
-import com.example.emulator.service.SendService;
+import com.example.emulator.service.*;
 
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
         ParserService parser = new GsonParserService();
-        SendService sendService = System.out::println;
+        SendService sendService = new PostSendService();
         EmulatorConfig config = null;
         try {
             config = parser.getEmulatorConfig("emulator/config.json");

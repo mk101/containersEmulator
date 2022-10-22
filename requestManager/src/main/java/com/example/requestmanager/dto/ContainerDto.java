@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.List;
 
 @Data
@@ -12,6 +11,6 @@ import java.util.List;
 @AllArgsConstructor
 public class ContainerDto {
     private int containerNumber;
-    private Date timeStamp;
+    private String timeStamp;
     private List<Double> sensorsValues;
 }
