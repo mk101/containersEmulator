@@ -1,2 +1,6 @@
 server:
   port: 81
+
+kafka:
+  server: 127.0.0.1:9092
+  producer-id: 42

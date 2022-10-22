@@ -1,9 +1,9 @@
 {
-  "containersCount": 25,
+  "containersCount": 24,
   "startEmulatingTime": "22.10.2022 12:20:00",
-  "maxTimeShift": 0.5,
-  "recordingStep": 1,
-  "stepCount": 10,
+  "maxTimeShift": 1.5,
+  "recordingStep": 5,
+  "stepCount": 100,
   "sensors": [
     {
       "id": 1,
