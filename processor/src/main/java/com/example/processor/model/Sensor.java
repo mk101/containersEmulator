@@ -16,7 +16,7 @@ public class Sensor {
     @Id
     private Integer number;
 
-    @Column(nullable = false)
+    @Column(name = "sensor_value",nullable = false)
     private Double numeric;
 
     @Id
