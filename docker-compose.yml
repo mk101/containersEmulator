@@ -91,6 +91,7 @@ services:
       - broker1
       - broker2
       - broker3
+      - kafka-ui
     environment:
       # The following settings are listed here only to satisfy the image's requirements.
       # We override the image's `command` anyways, hence this container will not start a broker.
