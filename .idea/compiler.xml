@@ -10,7 +10,7 @@
         <module name="requestManager" />
         <module name="emulator" />
       </profile>
-      <profile name="Annotation profile for globus-exam" enabled="true">
+      <profile name="Annotation profile for auntificationService" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -21,11 +21,13 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.2.Final/mapstruct-1.5.2.Final.jar" />
         </processorPath>
         <module name="processor" />
+        <module name="auntificationService" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="auntificationService" options="-parameters" />
       <module name="processor" options="-parameters" />
       <module name="requestManager" options="-parameters" />
     </option>

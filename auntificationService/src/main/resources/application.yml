@@ -1,0 +1,20 @@
+server:
+  port: 85
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:2345/users?WriteBatchedInsert=true
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 25
+
+jwt:
+  keys:
+    access:
+      private: classpath:keys/access.priv
+      public: classpath:keys/access.pub
+    refresh:
+      private: classpath:keys/refresh.priv
+      public: classpath:keys/refresh.pub

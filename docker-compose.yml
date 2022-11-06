@@ -111,3 +111,14 @@ services:
       - "5432:5432"
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  users-database:
+    image: postgres
+    container_name: auth-db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=users
+    ports:
+      - "2345:5432"
+    volumes:
+      - ./init_auth.sql:/docker-entrypoint-initdb.d/init.sql
