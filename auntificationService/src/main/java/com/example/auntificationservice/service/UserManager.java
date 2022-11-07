@@ -1,5 +1,6 @@
 package com.example.auntificationservice.service;
 
+import com.example.auntificationservice.exception.UserAlreadyExistsException;
 import com.example.auntificationservice.model.User;
 import com.example.auntificationservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,9 @@ public class UserManager implements UserDetailsManager {
     @Override
     @Transactional
     public void createUser(UserDetails user) {
+        if (userExists(user.getUsername())) {
+            throw new UserAlreadyExistsException(String.format("User %s already exists", user.getUsername()));
+        }
         ((User)user).setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save((User)user);
     }
