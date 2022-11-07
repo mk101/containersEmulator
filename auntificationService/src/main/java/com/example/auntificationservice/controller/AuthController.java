@@ -5,10 +5,12 @@ import com.example.auntificationservice.dto.UserDto;
 import com.example.auntificationservice.model.User;
 import com.example.auntificationservice.security.TokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.server.resource.BearerTokenAuthenticationToken;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,12 +27,14 @@ public class AuthController {
     private final UserDetailsManager userDetailsManager;
     private final TokenGenerator tokenGenerator;
     private final DaoAuthenticationProvider authenticationProvider;
+    private final JwtAuthenticationProvider jwtRefreshTokenAuthProvider;
 
     @Autowired
-    public AuthController(UserDetailsManager userDetailsManager, TokenGenerator tokenGenerator, DaoAuthenticationProvider authenticationProvider) {
+    public AuthController(UserDetailsManager userDetailsManager, TokenGenerator tokenGenerator, DaoAuthenticationProvider authenticationProvider, @Qualifier("jwtRefreshTokenAuthProvider") JwtAuthenticationProvider jwtRefreshTokenAuthProvider) {
         this.userDetailsManager = userDetailsManager;
         this.tokenGenerator = tokenGenerator;
         this.authenticationProvider = authenticationProvider;
+        this.jwtRefreshTokenAuthProvider = jwtRefreshTokenAuthProvider;
     }
 
     @PostMapping("/register")
@@ -46,6 +50,13 @@ public class AuthController {
     @PostMapping("/login")
     public TokenDto login(@RequestBody UserDto userDto) {
         Authentication authentication = authenticationProvider.authenticate(UsernamePasswordAuthenticationToken.unauthenticated(userDto.getUsername(), userDto.getPassword()));
+
+        return tokenGenerator.createToken(authentication);
+    }
+
+    @PostMapping("/token")
+    public TokenDto token(@RequestBody TokenDto tokenDto) {
+        Authentication authentication = jwtRefreshTokenAuthProvider.authenticate(new BearerTokenAuthenticationToken(tokenDto.getRefreshToken()));
 
         return tokenGenerator.createToken(authentication);
     }
