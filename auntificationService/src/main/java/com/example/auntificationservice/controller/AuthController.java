@@ -1,14 +1,17 @@
 package com.example.auntificationservice.controller;
 
+import com.example.auntificationservice.dto.ErrorDto;
 import com.example.auntificationservice.dto.TokenDto;
 import com.example.auntificationservice.dto.UserDto;
 import com.example.auntificationservice.model.User;
 import com.example.auntificationservice.security.TokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.server.resource.BearerTokenAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
 import org.springframework.security.provisioning.UserDetailsManager;
@@ -59,5 +62,10 @@ public class AuthController {
         Authentication authentication = jwtRefreshTokenAuthProvider.authenticate(new BearerTokenAuthenticationToken(tokenDto.getRefreshToken()));
 
         return tokenGenerator.createToken(authentication);
+    }
+
+    @PostMapping("/authenticate")
+    public ErrorDto authenticate(@AuthenticationPrincipal User user) {
+        return new ErrorDto(HttpStatus.OK, "User found");
     }
 }
