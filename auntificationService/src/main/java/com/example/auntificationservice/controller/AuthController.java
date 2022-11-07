@@ -7,6 +7,7 @@ import com.example.auntificationservice.security.TokenGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,20 +24,29 @@ public class AuthController {
 
     private final UserDetailsManager userDetailsManager;
     private final TokenGenerator tokenGenerator;
+    private final DaoAuthenticationProvider authenticationProvider;
 
     @Autowired
-    public AuthController(UserDetailsManager userDetailsManager, TokenGenerator tokenGenerator) {
+    public AuthController(UserDetailsManager userDetailsManager, TokenGenerator tokenGenerator, DaoAuthenticationProvider authenticationProvider) {
         this.userDetailsManager = userDetailsManager;
         this.tokenGenerator = tokenGenerator;
+        this.authenticationProvider = authenticationProvider;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<TokenDto> register(@RequestBody UserDto userDto) {
+    public TokenDto register(@RequestBody UserDto userDto) {
         User user = new User(UUID.randomUUID().toString(), userDto.getUsername(), userDto.getPassword());
         userDetailsManager.createUser(user);
 
         Authentication authentication = UsernamePasswordAuthenticationToken.authenticated(user, userDto.getPassword(), Collections.emptyList());
 
-        return ResponseEntity.ok(tokenGenerator.createToken(authentication));
+        return tokenGenerator.createToken(authentication);
+    }
+
+    @PostMapping("/login")
+    public TokenDto login(@RequestBody UserDto userDto) {
+        Authentication authentication = authenticationProvider.authenticate(UsernamePasswordAuthenticationToken.unauthenticated(userDto.getUsername(), userDto.getPassword()));
+
+        return tokenGenerator.createToken(authentication);
     }
 }
