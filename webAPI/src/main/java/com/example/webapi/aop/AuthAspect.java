@@ -50,9 +50,8 @@ public class AuthAspect {
         headers.add("Authorization", key);
 
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
-        ResponseEntity<String> response;
         try {
-            response = restTemplate.exchange(authConfig.getUrl() + "/authenticate", HttpMethod.POST, entity, String.class);
+            ResponseEntity<String> response = restTemplate.exchange(authConfig.getUrl() + "/authenticate", HttpMethod.POST, entity, String.class);
             if (response.getStatusCode() != HttpStatus.OK) {
                 throw new AuthenticationException("Authentication is failed");
             }
