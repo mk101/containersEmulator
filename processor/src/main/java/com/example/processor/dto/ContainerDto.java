@@ -13,5 +13,6 @@ public class ContainerDto {
     private int containerNumber;
     private String timeStamp;
     private List<Double> sensorsValues;
+    private List<String> sensorsNames;
 }
 

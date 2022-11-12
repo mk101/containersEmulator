@@ -36,7 +36,7 @@ public class ContainerService {
             double value = containerDto.getSensorsValues().get(i);
 
             var sensor = new Sensor();
-            sensor.setNumber(i+1);
+            sensor.setName(containerDto.getSensorsNames().get(i));
             sensor.setNumeric(value);
             sensor.setMessageId(container.getMessageId());
             sensor = sensorRepository.save(sensor);

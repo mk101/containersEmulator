@@ -20,12 +20,13 @@ public abstract class ContainerMapperDecorator implements ContainerMapper {
        Container container = delegate.map(containerDto);
 
        List<Sensor> sensors = new ArrayList<>();
-        List<Double> sensorsValues = containerDto.getSensorsValues();
+       List<Double> sensorsValues = containerDto.getSensorsValues();
+       List<String> sensorsNames = containerDto.getSensorsNames();
         for (int i = 0; i < sensorsValues.size(); i++) {
             double value = sensorsValues.get(i);
 
             var sensor = new Sensor();
-            sensor.setNumber(i+1);
+            sensor.setName(sensorsNames.get(i));
             sensor.setNumeric(value);
             sensor.setMessageId(container.getMessageId());
 

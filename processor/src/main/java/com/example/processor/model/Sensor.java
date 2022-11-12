@@ -14,7 +14,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Sensor {
     @Id
-    private Integer number;
+    @Column(name = "sensor_name", nullable = false)
+    private String name;
 
     @Column(name = "sensor_value",nullable = false)
     private Double numeric;

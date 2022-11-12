@@ -10,6 +10,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SensorId implements Serializable {
-    private Integer number;
+    private String name;
     private Integer messageId;
 }

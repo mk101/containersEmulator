@@ -36,10 +36,12 @@ public class ContainerRunnable implements Runnable {
                     .containerNumber(config.getContainerNumber())
                     .timeStamp(time.getTime())
                     .sensorsValues(new ArrayList<>())
+                    .sensorsNames(new ArrayList<>())
                     .build();
 
             for (var sensor : config.getSensors()) {
                 double value = sensor.getAverage() - sensor.getMaximumDispersion() + (2 * sensor.getMaximumDispersion()) * random.nextDouble();
+                dto.getSensorsNames().add(sensor.getName());
                 dto.getSensorsValues().add(value);
             }
 

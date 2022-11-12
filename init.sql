@@ -5,8 +5,8 @@ CREATE TABLE containers (
 );
 
 CREATE TABLE sensors (
-    number INT NOT NULL,
+    sensor_name VARCHAR(128) NOT NULL,
     sensor_value DECIMAL NOT NULL,
     message_id INT NOT NULL REFERENCES containers(message_id),
-    PRIMARY KEY (number, message_id)
+    PRIMARY KEY (sensor_name, message_id)
 );
