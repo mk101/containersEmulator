@@ -10,7 +10,7 @@
         <module name="requestManager" />
         <module name="emulator" />
       </profile>
-      <profile name="Annotation profile for auntificationService" enabled="true">
+      <profile name="Annotation profile for globus-exam" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -21,8 +21,8 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.2.Final/mapstruct-1.5.2.Final.jar" />
         </processorPath>
         <module name="processor" />
-        <module name="auntificationService" />
         <module name="webAPI" />
+        <module name="auntificationService" />
       </profile>
     </annotationProcessing>
   </component>

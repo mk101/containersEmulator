@@ -12,6 +12,8 @@
     <module>emulator</module>
     <module>requestManager</module>
     <module>processor</module>
+    <module>auntificationService</module>
+    <module>webAPI</module>
   </modules>
 
   <name>globus-exam</name>
