@@ -7,27 +7,21 @@
   "sensors": [
     {
       "id": 1,
-      "name": "Sensor 1",
-      "average": 14.6,
-      "maximumDispersion": 10
+      "name": "Temperature",
+      "average": 25.6,
+      "maximumDispersion": 5.7
     },
     {
       "id": 2,
-      "name": "Sensor 2",
+      "name": "Humidity",
       "average": 10,
       "maximumDispersion": 1
     },
     {
       "id": 3,
-      "name": "Sensor 3",
+      "name": "Impact",
       "average": 40,
       "maximumDispersion": 15.6
-    },
-    {
-      "id": 4,
-      "name": "Sensor 4",
-      "average": 72,
-      "maximumDispersion": 14.7
     }
   ],
   "sendInterval": 2
