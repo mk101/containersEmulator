@@ -45,8 +45,8 @@ public class WebController {
         }
 
         Instant start = containerService.getStartTime().toInstant();
-        start = start.plus((long)(timeAfter), ChronoUnit.MILLIS);
-        Instant end = start.plus((long)(timeTo), ChronoUnit.MILLIS);
+        start = start.plus((long)(timeAfter), ChronoUnit.SECONDS);
+        Instant end = start.plus((long)(timeTo), ChronoUnit.SECONDS);
 
         PageRequest pageRequest = PageRequest.of(0, stringForPage, Sort.by("timestamp"));
 
