@@ -52,6 +52,10 @@ public class UserManager implements UserDetailsManager {
         return userRepository.existsByUsername(username);
     }
 
+    public boolean userExistsById(String id) {
+        return userRepository.existsById(id);
+    }
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findByUsername(username)

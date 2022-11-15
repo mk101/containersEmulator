@@ -5,9 +5,11 @@ import com.example.auntificationservice.dto.TokenDto;
 import com.example.auntificationservice.dto.UserDto;
 import com.example.auntificationservice.model.User;
 import com.example.auntificationservice.security.TokenGenerator;
+import com.example.auntificationservice.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -27,13 +29,13 @@ import java.util.UUID;
 @RequestMapping("/api/v1/auth/")
 public class AuthController {
 
-    private final UserDetailsManager userDetailsManager;
+    private final UserManager userDetailsManager;
     private final TokenGenerator tokenGenerator;
     private final DaoAuthenticationProvider authenticationProvider;
     private final JwtAuthenticationProvider jwtRefreshTokenAuthProvider;
 
     @Autowired
-    public AuthController(UserDetailsManager userDetailsManager, TokenGenerator tokenGenerator, DaoAuthenticationProvider authenticationProvider, @Qualifier("jwtRefreshTokenAuthProvider") JwtAuthenticationProvider jwtRefreshTokenAuthProvider) {
+    public AuthController(UserManager userDetailsManager, TokenGenerator tokenGenerator, DaoAuthenticationProvider authenticationProvider, @Qualifier("jwtRefreshTokenAuthProvider") JwtAuthenticationProvider jwtRefreshTokenAuthProvider) {
         this.userDetailsManager = userDetailsManager;
         this.tokenGenerator = tokenGenerator;
         this.authenticationProvider = authenticationProvider;
@@ -65,7 +67,12 @@ public class AuthController {
     }
 
     @PostMapping("/authenticate")
-    public ErrorDto authenticate(@AuthenticationPrincipal User user) {
-        return new ErrorDto(HttpStatus.OK, "User found");
+    public ResponseEntity<ErrorDto> authenticate(@AuthenticationPrincipal User user) {
+        if ( !userDetailsManager.userExistsById(user.getId()) ) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
+                    new ErrorDto(HttpStatus.UNAUTHORIZED, "Unauthorized")
+            );
+        }
+        return ResponseEntity.ok(new ErrorDto(HttpStatus.OK, "User found"));
     }
 }
