@@ -124,8 +124,8 @@ services:
       - database
       - users-database
     volumes:
-      - ./db/:/liquibase/database/
-      - ./db-users/:/liquibase/database-users/
+      - ./liquibase/db/:/liquibase/database/
+      - ./liquibase/db-users/:/liquibase/database-users/
     command: bash -c "
         liquibase --defaults-file=/liquibase/database/liquibase.properties --search-path=/liquibase/database/ update &&
         liquibase --defaults-file=/liquibase/database-users/liquibase.properties --search-path=/liquibase/database-users/ update
