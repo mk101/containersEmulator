@@ -7,10 +7,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="requestManager" />
-        <module name="emulator" />
       </profile>
-      <profile name="Annotation profile for globus-exam" enabled="true">
+      <profile name="Annotation profile for containersEmulator" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -20,18 +18,20 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.2.Final/mapstruct-processor-1.5.2.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.2.Final/mapstruct-1.5.2.Final.jar" />
         </processorPath>
-        <module name="processor" />
+        <module name="requestManager" />
+        <module name="emulator" />
         <module name="webAPI" />
+        <module name="processor" />
         <module name="auntificationService" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="auntificationService" options="-parameters" />
-      <module name="processor" options="-parameters" />
-      <module name="requestManager" options="-parameters" />
-      <module name="webAPI" options="-parameters" />
+      <module name="auntificationService" options="" />
+      <module name="processor" options="" />
+      <module name="requestManager" options="" />
+      <module name="webAPI" options="" />
     </option>
   </component>
 </project>

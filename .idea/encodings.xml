@@ -2,12 +2,16 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/auntificationService/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/auntificationService/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/emulator/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/emulator/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/processor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/processor/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/requestManager/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/requestManager/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/webAPI/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/webAPI/src/main/resources" charset="UTF-8" />
   </component>
 </project>
