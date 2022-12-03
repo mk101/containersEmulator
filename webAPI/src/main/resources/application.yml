@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/globus?WriteBatchedInsert=true
+    url: jdbc:postgresql://localhost:5432/containers?WriteBatchedInsert=true
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver

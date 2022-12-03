@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="globus@localhost" uuid="0ff9c41d-990e-4413-adf0-85e56e7014e3">
+    <data-source source="LOCAL" name="containers@localhost" uuid="0ff9c41d-990e-4413-adf0-85e56e7014e3">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/globus</jdbc-url>
+      <jdbc-url>jdbc:postgresql://localhost:5432/containers</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="users@localhost" uuid="23162638-0979-4746-8353-182b52746414">

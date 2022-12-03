@@ -93,12 +93,9 @@ services:
       - broker3
       - kafka-ui
     environment:
-      # The following settings are listed here only to satisfy the image's requirements.
-      # We override the image's `command` anyways, hence this container will not start a broker.
       KAFKA_BROKER_ID: ignored
       KAFKA_ZOOKEEPER_CONNECT: ignored
-    #entrypoint: [ '/bin/sh', '-c' ]
-    command: "kafka-topics --create --if-not-exists --bootstrap-server broker1:29092 --partitions 3 --replication-factor 3 --topic containers"
+    command: sh -c "sleep 10 && kafka-topics --create --if-not-exists --bootstrap-server broker1:29092 --partitions 3 --replication-factor 3 --topic containers"
 
   database:
     image: postgres
@@ -106,11 +103,10 @@ services:
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=globus
+      - POSTGRES_DB=containers
     ports:
       - "5432:5432"
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
   users-database:
     image: postgres
     container_name: auth-db
@@ -120,5 +116,17 @@ services:
       - POSTGRES_DB=users
     ports:
       - "2345:5432"
+
+  liquibase:
+    image: liquibase/liquibase
+    container_name: liquibase
+    depends_on:
+      - database
+      - users-database
     volumes:
-      - ./init_auth.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./db/:/liquibase/database/
+      - ./db-users/:/liquibase/database-users/
+    command: bash -c "
+        liquibase --defaults-file=/liquibase/database/liquibase.properties --search-path=/liquibase/database/ update &&
+        liquibase --defaults-file=/liquibase/database-users/liquibase.properties --search-path=/liquibase/database-users/ update
+      "
