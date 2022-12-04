@@ -12,7 +12,6 @@ public class ControllerHandler {
     @ExceptionHandler(value = {Exception.class, RuntimeException.class})
     public ResponseEntity<MessageDto> handleExceptions(RuntimeException e) {
         return ResponseEntity.badRequest().body(new MessageDto(
-                HttpStatus.BAD_REQUEST,
                 e.getMessage()
         ));
     }

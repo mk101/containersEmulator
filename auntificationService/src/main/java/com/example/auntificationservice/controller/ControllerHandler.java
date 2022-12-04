@@ -13,7 +13,7 @@ public class ControllerHandler {
     @ExceptionHandler(value = {UserAlreadyExistsException.class})
     public ResponseEntity<ErrorDto> handleUserAlreadyExists(UserAlreadyExistsException e) {
         return ResponseEntity.badRequest().body(
-                new ErrorDto(HttpStatus.BAD_REQUEST, e.getMessage())
+                new ErrorDto(e.getMessage())
         );
     }
 }

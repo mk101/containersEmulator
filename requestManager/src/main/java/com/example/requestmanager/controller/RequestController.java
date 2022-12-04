@@ -18,6 +18,6 @@ public class RequestController {
     @PostMapping("/")
     public MessageDto post(@RequestBody ContainerDto container) {
         producerService.sendToKafka(container);
-        return new MessageDto(HttpStatus.OK, "");
+        return new MessageDto("Success");
     }
 }

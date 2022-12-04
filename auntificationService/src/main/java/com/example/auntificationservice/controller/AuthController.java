@@ -70,9 +70,9 @@ public class AuthController {
     public ResponseEntity<ErrorDto> authenticate(@AuthenticationPrincipal User user) {
         if ( !userDetailsManager.userExistsById(user.getId()) ) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(
-                    new ErrorDto(HttpStatus.UNAUTHORIZED, "Unauthorized")
+                    new ErrorDto("Unauthorized")
             );
         }
-        return ResponseEntity.ok(new ErrorDto(HttpStatus.OK, "User found"));
+        return ResponseEntity.ok(new ErrorDto("User found"));
     }
 }
