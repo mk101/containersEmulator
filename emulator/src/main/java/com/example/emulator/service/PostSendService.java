@@ -12,11 +12,17 @@ import java.net.http.HttpClient;
 
 public class PostSendService implements SendService {
 
+    private final String requestManagerUrl;
+
+    public PostSendService(String requestManagerUrl) {
+        this.requestManagerUrl = requestManagerUrl;
+    }
+
     @Override
     public void send(String message) {
 
         try (CloseableHttpClient client = HttpClients.createDefault()) {
-            HttpPost request = new HttpPost("http://127.0.0.1:81/");
+            HttpPost request = new HttpPost(requestManagerUrl);
 
             StringEntity entity = new StringEntity(message);
             request.setEntity(entity);

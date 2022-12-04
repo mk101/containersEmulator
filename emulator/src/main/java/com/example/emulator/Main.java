@@ -8,10 +8,11 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) {
         ParserService parser = new GsonParserService();
-        SendService sendService = new PostSendService();
+        SendService sendService = null;
         EmulatorConfig config = null;
         try {
             config = parser.getEmulatorConfig("emulator/config.json");
+            sendService = new PostSendService(config.getRequestManagerUrl());
         } catch (IOException e) {
             e.printStackTrace();
         }

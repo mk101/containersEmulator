@@ -33,6 +33,38 @@ public class KeyUtils {
     private KeyPair accessTokenKeyPair;
     private KeyPair refreshTokenKeyPair;
 
+    public RSAPublicKey getAccessTokenPublicKey() {
+        return (RSAPublicKey) getAccessTokenKeyPair().getPublic();
+    }
+
+    public RSAPrivateKey getAccessTokenPrivateKey() {
+        return (RSAPrivateKey) getAccessTokenKeyPair().getPrivate();
+    }
+
+    public RSAPublicKey getRefreshTokenPublicKey() {
+        return (RSAPublicKey) getRefreshTokenKeyPair().getPublic();
+    }
+
+    public RSAPrivateKey getRefreshTokenPrivateKey() {
+        return (RSAPrivateKey) getRefreshTokenKeyPair().getPrivate();
+    }
+
+    private KeyPair getAccessTokenKeyPair() {
+        if (accessTokenKeyPair == null) {
+            accessTokenKeyPair = getKeyPair(accessPublicKey, accessPrivateKey);
+        }
+
+        return accessTokenKeyPair;
+    }
+
+    private KeyPair getRefreshTokenKeyPair() {
+        if (refreshTokenKeyPair == null) {
+            refreshTokenKeyPair = getKeyPair(refreshPublicKey, refreshPrivateKey);
+        }
+
+        return refreshTokenKeyPair;
+    }
+
     private KeyPair getKeyPair(Resource publicKeyResource, Resource privateKeyResource) {
 
         if (publicKeyResource.exists() && privateKeyResource.exists()) {
@@ -53,37 +85,5 @@ public class KeyUtils {
         } else {
             throw new NullArgumentException("Files with keys don't exist");
         }
-    }
-
-    private KeyPair getAccessTokenKeyPair() {
-        if (accessTokenKeyPair == null) {
-            accessTokenKeyPair = getKeyPair(accessPublicKey, accessPrivateKey);
-        }
-
-        return accessTokenKeyPair;
-    }
-
-    private KeyPair getRefreshTokenKeyPair() {
-        if (refreshTokenKeyPair == null) {
-            refreshTokenKeyPair = getKeyPair(refreshPublicKey, refreshPrivateKey);
-        }
-
-        return refreshTokenKeyPair;
-    }
-
-    public RSAPublicKey getAccessTokenPublicKey() {
-        return (RSAPublicKey) getAccessTokenKeyPair().getPublic();
-    }
-
-    public RSAPrivateKey getAccessTokenPrivateKey() {
-        return (RSAPrivateKey) getAccessTokenKeyPair().getPrivate();
-    }
-
-    public RSAPublicKey getRefreshTokenPublicKey() {
-        return (RSAPublicKey) getRefreshTokenKeyPair().getPublic();
-    }
-
-    public RSAPrivateKey getRefreshTokenPrivateKey() {
-        return (RSAPrivateKey) getRefreshTokenKeyPair().getPrivate();
     }
 }

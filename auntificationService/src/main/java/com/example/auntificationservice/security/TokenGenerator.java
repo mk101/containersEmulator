@@ -27,6 +27,33 @@ public class TokenGenerator {
         this.refreshTokenEncoder = refreshTokenEncoder;
     }
 
+    public TokenDto createToken(Authentication authentication) {
+        User user = (User) authentication.getPrincipal();
+
+        TokenDto tokenDto = new TokenDto();
+        tokenDto.setUserId(user.getId());
+        tokenDto.setAccessToken(createAccessToken(authentication));
+
+        String refreshToken;
+
+        if (authentication.getCredentials() instanceof Jwt jwt) {
+            Instant expireAt = jwt.getExpiresAt();
+            Duration duration = Duration.between(Instant.now(), expireAt);
+            long minutesUntilExpired = duration.toMinutes();
+            if (minutesUntilExpired < 30) {
+                refreshToken = createRefreshToken(authentication);
+            } else {
+                refreshToken = jwt.getTokenValue();
+            }
+        } else {
+            refreshToken = createRefreshToken(authentication);
+        }
+
+        tokenDto.setRefreshToken(refreshToken);
+
+        return tokenDto;
+    }
+
     private String createAccessToken(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         Instant now = Instant.now();
@@ -53,32 +80,5 @@ public class TokenGenerator {
                 .build();
 
         return refreshTokenEncoder.encode(JwtEncoderParameters.from(claimsSet)).getTokenValue();
-    }
-
-    public TokenDto createToken(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-
-        TokenDto tokenDto = new TokenDto();
-        tokenDto.setUserId(user.getId());
-        tokenDto.setAccessToken(createAccessToken(authentication));
-
-        String refreshToken;
-
-        if (authentication.getCredentials() instanceof Jwt jwt) {
-            Instant expireAt = jwt.getExpiresAt();
-            Duration duration = Duration.between(Instant.now(), expireAt);
-            long minutesUntilExpired = duration.toMinutes();
-            if (minutesUntilExpired < 30) {
-                refreshToken = createRefreshToken(authentication);
-            } else {
-                refreshToken = jwt.getTokenValue();
-            }
-        } else {
-            refreshToken = createRefreshToken(authentication);
-        }
-
-        tokenDto.setRefreshToken(refreshToken);
-
-        return tokenDto;
     }
 }

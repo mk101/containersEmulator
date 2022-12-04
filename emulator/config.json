@@ -24,5 +24,6 @@
       "maximumDispersion": 15.6
     }
   ],
-  "sendInterval": 2
+  "sendInterval": 2,
+  "requestManagerUrl": "http://127.0.0.1:81/"
 }

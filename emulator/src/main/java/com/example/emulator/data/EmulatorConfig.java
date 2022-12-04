@@ -17,4 +17,5 @@ public class EmulatorConfig {
     private int stepCount;
     private List<SensorConfig> sensors;
     private int sendInterval;
+    private String requestManagerUrl;
 }
