@@ -5,6 +5,7 @@ import com.example.webapi.dto.PageDto;
 import com.example.webapi.mapper.ContainerMapper;
 import com.example.webapi.model.Container;
 import com.example.webapi.repository.ContainerRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,16 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ContainerService {
 
     private final ContainerRepository containerRepository;
     private final ContainerMapper containerMapper;
-
-    @Autowired
-    public ContainerService(ContainerRepository containerRepository, ContainerMapper containerMapper) {
-        this.containerRepository = containerRepository;
-        this.containerMapper = containerMapper;
-    }
 
     public List<PageDto> generatePages(Pageable pageable, Timestamp start, Timestamp end) {
         List<PageDto> pages = new ArrayList<>();

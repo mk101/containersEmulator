@@ -6,6 +6,7 @@ import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -27,6 +28,7 @@ import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
+@RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurity {
 
@@ -34,15 +36,6 @@ public class WebSecurity {
     private final KeyUtils keyUtils;
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsManager userDetailsManager;
-
-    @Autowired
-    public WebSecurity(JwtConverter jwtConverter, KeyUtils keyUtils, PasswordEncoder passwordEncoder, UserDetailsManager userDetailsManager) {
-        this.jwtConverter = jwtConverter;
-        this.keyUtils = keyUtils;
-        this.passwordEncoder = passwordEncoder;
-        this.userDetailsManager = userDetailsManager;
-    }
-
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

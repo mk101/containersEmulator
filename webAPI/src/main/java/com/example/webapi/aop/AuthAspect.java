@@ -2,6 +2,7 @@ package com.example.webapi.aop;
 
 import com.example.webapi.config.AuthConfig;
 import com.example.webapi.exception.AuthenticationException;
+import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -16,14 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 
 @Aspect
 @Component
+@RequiredArgsConstructor
 public class AuthAspect {
 
     private final AuthConfig authConfig;
-
-    @Autowired
-    public AuthAspect(AuthConfig authConfig) {
-        this.authConfig = authConfig;
-    }
 
     @Before("@annotation(AuthRequired)")
     public void authenticateBefore(JoinPoint joinPoint) {

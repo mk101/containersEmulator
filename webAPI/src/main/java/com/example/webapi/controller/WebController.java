@@ -4,6 +4,7 @@ import com.example.webapi.aop.AuthRequired;
 import com.example.webapi.dto.PageDto;
 import com.example.webapi.exception.InvalidAttributeException;
 import com.example.webapi.service.ContainerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,14 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class WebController {
 
     private final ContainerService containerService;
-
-    @Autowired
-    public WebController(ContainerService containerService) {
-        this.containerService = containerService;
-    }
 
     @GetMapping("/api/v1/data")
     @AuthRequired

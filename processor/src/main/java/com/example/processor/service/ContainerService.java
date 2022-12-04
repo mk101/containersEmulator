@@ -6,6 +6,7 @@ import com.example.processor.model.Container;
 import com.example.processor.model.Sensor;
 import com.example.processor.repository.ContainerRepository;
 import com.example.processor.repository.SensorRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,18 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@RequiredArgsConstructor
 public class ContainerService {
 
     private final ContainerRepository containerRepository;
     private final SensorRepository sensorRepository;
     private final ContainerMapper containerMapper;
-
-    @Autowired
-    public ContainerService(ContainerRepository containerRepository, SensorRepository sensorRepository, ContainerMapper containerMapper) {
-        this.containerRepository = containerRepository;
-        this.sensorRepository = sensorRepository;
-        this.containerMapper = containerMapper;
-    }
 
     @Transactional
     public Container save(ContainerDto containerDto) {
