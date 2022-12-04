@@ -10,3 +10,11 @@ spring:
 kafka:
   server: 127.0.0.1:9092
   group-id: processor
+
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
+    org.springframework.data: INFO
+    com.example.processor.service: INFO
+    kafka: INFO
