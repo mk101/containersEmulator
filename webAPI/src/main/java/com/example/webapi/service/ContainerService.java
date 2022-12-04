@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -47,7 +48,10 @@ public class ContainerService {
     }
 
     public Timestamp getStartTime() {
-        Container container = containerRepository.findById(1).orElseThrow(() -> new RuntimeException("No containers in bd"));
+        Container container = containerRepository.findAll(Sort.by("timestamp")).iterator().next();
+        if (container == null) {
+            throw  new RuntimeException("No containers in bd");
+        }
         return container.getTimestamp();
     }
 }
