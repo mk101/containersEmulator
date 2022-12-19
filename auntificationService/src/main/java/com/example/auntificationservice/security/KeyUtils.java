@@ -5,8 +5,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.security.*;
@@ -82,8 +80,8 @@ public class KeyUtils {
             } catch (NoSuchAlgorithmException | IOException | InvalidKeySpecException e) {
                 throw new RuntimeException(e);
             }
-        } else {
-            throw new NullArgumentException("Files with keys don't exist");
         }
+
+        throw new NullArgumentException("Files with keys don't exist");
     }
 }
